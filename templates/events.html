@@ -114,7 +114,6 @@
             <h1 style="text-align: center; color:white;">Jalumuru Hill (Admin Pannel)</h1>
             <h2>Event Entry Form</h2>
             <form method="POST">
-                <input type="text" name="image_url" placeholder="Image URL (optional)">
                 <input type="text" name="eventname" placeholder="Event Name" required>
                 <input type="text" name="event_date" placeholder="Event Date" required>
                 <input type="text" name="event_temple" placeholder="Temple Name" required>
@@ -132,7 +131,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Image</th>
+                      
                         <th>Event Name</th>
                         <th>Date</th>
                         <th>Temple</th>
@@ -144,13 +143,7 @@
                     {% for event in events %}
                     <tr>
                         <td>{{ event[0] }}</td>
-                        <td>
-                            {% if event[5] %}
-                            <img src="{{ event[5] }}" class="thumbnail" alt="Event Image">
-                            {% else %}
-                            N/A
-                            {% endif %}
-                        </td>
+                        
                         <td>{{ event[1] }}</td>
                         <td>{{ event[2] }}</td>
                         <td>{{ event[3] }}</td>

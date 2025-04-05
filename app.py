@@ -141,15 +141,15 @@ def events():
 @app.route('/edit_event/<int:id>', methods=['GET', 'POST'])
 def edit_event(id):
     if request.method == 'POST':
-        image_url = request.form['image_url']
+       
         eventname = request.form['eventname']
         event_date = request.form['event_date']
         event_temple = request.form['event_temple']
         discription = request.form['discription']
 
         cursor.execute("""
-            UPDATE events SET eventname=%s, event_date=%s, event_temple=%s, discription=%s, image_url=%s WHERE id=%s
-        """, (eventname, event_date, event_temple, discription, image_url, id))
+            UPDATE events SET eventname=%s, event_date=%s, event_temple=%s, discription=%s WHERE id=%s
+        """, (eventname, event_date, event_temple, discription, id))
         conn.commit()
         return redirect(url_for('events'))
 
@@ -171,15 +171,19 @@ def ebooks():
         format = request.form['format']
         size = request.form['size']
         download_link = request.form['download_link']
+        image_url = request.form.get('image_url')  # get() to avoid KeyError if missing
 
-        cursor.execute("INSERT INTO ebooks (name, format, size, download_link) VALUES (%s, %s, %s, %s)",
-                       (name, format, size, download_link))
+        cursor.execute("""
+            INSERT INTO ebooks (name, format, size, download_link, image_url)
+            VALUES (%s, %s, %s, %s, %s)
+        """, (name, format, size, download_link, image_url))
         conn.commit()
         return redirect(url_for('ebooks'))
 
     cursor.execute("SELECT * FROM ebooks")
     ebooks = cursor.fetchall()
     return render_template('ebook.html', ebooks=ebooks)
+
 
 @app.route('/edit_ebook/<int:id>', methods=['GET', 'POST'])
 def edit_ebook(id):
@@ -188,9 +192,13 @@ def edit_ebook(id):
         format = request.form['format']
         size = request.form['size']
         download_link = request.form['download_link']
+        image_url = request.form.get('image_url')  # Safe fetch
 
-        cursor.execute("UPDATE ebooks SET name=%s, format=%s, size=%s, download_link=%s WHERE id=%s",
-                       (name, format, size, download_link, id))
+        cursor.execute("""
+            UPDATE ebooks
+            SET name=%s, format=%s, size=%s, download_link=%s, image_url=%s
+            WHERE id=%s
+        """, (name, format, size, download_link, image_url, id))
         conn.commit()
         return redirect(url_for('ebooks'))
 
@@ -198,11 +206,13 @@ def edit_ebook(id):
     ebook = cursor.fetchone()
     return render_template('edit_ebook.html', ebook=ebook)
 
+
 @app.route('/delete_ebook/<int:id>')
 def delete_ebook(id):
     cursor.execute("DELETE FROM ebooks WHERE id = %s", (id,))
     conn.commit()
     return redirect(url_for('ebooks'))
+
 
 # ---------- MAIN ----------
 if __name__ == '__main__':

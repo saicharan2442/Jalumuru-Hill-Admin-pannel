@@ -10,11 +10,13 @@
             background: linear-gradient(to right, #d4af37, #8b5e3c);
             color: #fff;
         }
+
         .container {
             display: flex;
             flex-direction: column;
             height: 100vh;
         }
+
         .form-section {
             padding: 20px;
             background-color: rgba(0, 0, 0, 0.5);
@@ -22,20 +24,25 @@
             top: 0;
             z-index: 2;
         }
-        .form-section h2 {
-            margin-bottom: 10px;
+
+        .form-section h1 {
+            text-align: center;
+            color: white;
         }
+
         .form-section form {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 15px;
             align-items: center;
         }
+
         .form-section input[type="text"] {
             padding: 10px;
             border: none;
             border-radius: 5px;
         }
+
         .form-section input[type="submit"] {
             padding: 15px 30px;
             background-color: #ffd700;
@@ -44,9 +51,10 @@
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
-            grid-column: 2 / 4;
+            grid-column: 2 / 5;
             justify-self: center;
         }
+
         .form-section input[type="submit"]:hover {
             background-color: #e6be00;
         }
@@ -64,6 +72,7 @@
             background-color: #fff;
             color: #000;
             border-radius: 10px;
+            overflow: hidden;
         }
 
         th, td {
@@ -98,18 +107,25 @@
             border-radius: 5px;
             border: none;
         }
+
+        .ebook-image {
+            width: 60px;
+            height: auto;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="form-section">
-            <h1 style="text-align: center; color:white;">Jalumuru Hill (Admin Pannel)</h1>
+            <h1>Jalumuru Hill (Admin Panel)</h1>
             <h2>Ebook Entry Form</h2>
             <form method="POST">
                 <input type="text" name="name" placeholder="Ebook Name" required>
                 <input type="text" name="format" placeholder="Format (e.g. PDF)" required>
                 <input type="text" name="size" placeholder="Size (e.g. 1.5MB)" required>
                 <input type="text" name="download_link" placeholder="Download Link" required>
+                <input type="text" name="image_url" placeholder="Image URL (optional)">
                 <input type="submit" value="Submit">
             </form>
         </div>
@@ -126,6 +142,7 @@
                         <th>Format</th>
                         <th>Size</th>
                         <th>Download Link</th>
+                        <th>Image</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -136,6 +153,13 @@
                         <td>{{ ebook[2] }}</td>
                         <td>{{ ebook[3] }}</td>
                         <td><a href="{{ ebook[4] }}" target="_blank">Download</a></td>
+                        <td>
+                            {% if ebook[5] %}
+                                <img src="{{ ebook[5] }}" alt="Ebook Image" class="ebook-image">
+                            {% else %}
+                                No Image
+                            {% endif %}
+                        </td>
                         <td class="actions">
                             <a href="{{ url_for('edit_ebook', id=ebook[0]) }}">Edit</a>
                             <a href="{{ url_for('delete_ebook', id=ebook[0]) }}" onclick="return confirm('Are you sure?');">Delete</a>
