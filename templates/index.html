@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jalumuru Hill - Admin Panel</title>
+  <style>
+    /* Hide scrollbar but allow scrolling */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-y: scroll;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE 10+ */
+    }
+
+    body::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fdf6e3, #ecd9b0);
+      color: #333;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #8b5e3c;
+      padding: 10px 20px;
+      color: #fff;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 15px;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #ffd700;
+    }
+
+    .main-wrapper {
+      max-width: 1200px;
+      margin: 100px auto 40px;
+      padding: 30px;
+      border-radius: 24px;
+      background: #fff8ea;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .container {
+      display: flex;
+      min-height: 380px;
+      gap: 40px;
+    }
+
+    .left {
+      flex: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeInLeft 1s ease;
+    }
+
+    .info-card {
+      background-image: url('https://ice.lol/cgojRP');
+      background-size: cover;
+      background-position: center;
+      border-radius: 20px;
+      width: 100%;
+      height: 350px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      animation: zoomIn 1.2s ease;
+    }
+
+    .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 20px;
+    }
+
+    .info-card h1,
+    .info-card h3 {
+      position: relative;
+      color: gold;
+      text-align: center;
+      margin: 0;
+    }
+
+    .info-card h1 {
+      font-size: 46px;
+    }
+
+    .info-card h3 {
+      font-size: 22px;
+      margin-top: 10px;
+    }
+
+    .right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      animation: fadeInRight 1s ease;
+    }
+
+    .right a {
+      background-color: goldenrod;
+      color: white;
+      text-decoration: none;
+      padding: 16px 30px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 8px 0;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      text-align: center;
+    }
+
+    .right a:hover {
+      background-color: #c49000;
+      transform: translateX(-5px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #f5deb3;
+      color: #6b4f28;
+      font-size: 14px;
+      margin-top: 60px;
+    }
+
+    /* Animations */
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">
+      <img src="https://img.icons8.com/color/48/temple.png" alt="logo">
+      Jalumuru Hill
+    </div>
+    <div class="nav-links">
+      <a href="/temples">Temples</a>
+      <a href="/donars">Donars</a>
+      <a href="/events">Events</a>
+      <a href="/ebooks">eBooks</a>
+    </div>
+  </nav>
+
+  <div class="main-wrapper">
+    <div class="container">
+      <div class="left">
+        <div class="info-card">
+          <h1>Jalumuru Hill</h1>
+          <h3>Admin Panel</h3>
+        </div>
+      </div>
+      <div class="right">
+        <a href="/temples">Manage Temples</a>
+        <a href="/donars">Manage Donars</a>
+        <a href="/events">Manage Events</a>
+        <a href="/ebooks">Manage eBooks</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Jalumuru Hill. All rights reserved.
+  </footer>
+
+</body>
+</html>
